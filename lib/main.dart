@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
                 movieRepository: MovieRepositoryImpl(
                     api: MovieDataSource(), archived: archived),
               ),
-          child: MovieArchivedScreen()),
+          child: MovieMainScreen()),
     );
   }
 }

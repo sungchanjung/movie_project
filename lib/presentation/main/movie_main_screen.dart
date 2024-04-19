@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_project/presentation/archived/movie_archived_screen.dart';
 import 'package:movie_project/presentation/main/movie_main_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -43,7 +44,15 @@ class _MovieMainScreenState extends State<MovieMainScreen> {
         title: Text('영화목록'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => MovieArchivedScreen(
+
+                  ),
+                ),
+              );
+            },
             icon: Icon(Icons.favorite),
           ),
         ],
