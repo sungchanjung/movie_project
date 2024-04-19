@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_project/core/data_source/archived.dart';
 import 'package:movie_project/data/data_source/movie_data_source.dart';
 import 'package:movie_project/data/repository/movie_repository_impl.dart';
+import 'package:movie_project/presentation/archived/movie_archived_screen.dart';
 import 'package:movie_project/presentation/main/movie_main_screen.dart';
 import 'package:movie_project/presentation/main/movie_main_view_model.dart';
 import 'package:provider/provider.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
                 movieRepository: MovieRepositoryImpl(
                     api: MovieDataSource(), archived: archived),
               ),
-          child: MovieMainScreen()),
+          child: MovieArchivedScreen()),
     );
   }
 }
