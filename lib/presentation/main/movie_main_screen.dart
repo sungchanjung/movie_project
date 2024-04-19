@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:movie_project/presentation/archived/movie_archived_screen.dart';
 import 'package:movie_project/presentation/main/movie_main_view_model.dart';
 import 'package:provider/provider.dart';
+
+import '../../data/data_source/movie_data_source.dart';
+import '../../data/repository/movie_repository_impl.dart';
+import '../../main.dart';
+import '../archived/movie_archived_view_model.dart';
 
 class MovieMainScreen extends StatefulWidget {
   const MovieMainScreen({super.key});
@@ -26,12 +32,14 @@ class _MovieMainScreenState extends State<MovieMainScreen> {
       floatingActionButton: Row(
         children: [
           FloatingActionButton(
+            heroTag: '넘길래요',
             onPressed: () {
               viewModel.onPass();
             },
             child: Text('넘길래요'),
           ),
           FloatingActionButton(
+            heroTag: '좋아요',
             onPressed: () {
               viewModel.onLikes(viewModel.movieList[viewModel.index]);
             },
@@ -43,7 +51,21 @@ class _MovieMainScreenState extends State<MovieMainScreen> {
         title: Text('영화목록'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => ChangeNotifierProvider(
+                    create: (_) => MovieArchivedViewModel(
+                      movieRepository: MovieRepositoryImpl(
+                        api: MovieDataSource(),
+                        archived: archived,
+                      ),
+                    ),
+                    child: MovieArchivedScreen(),
+                  ),
+                ),
+              );
+            },
             icon: Icon(Icons.favorite),
           ),
         ],
