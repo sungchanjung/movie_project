@@ -3,7 +3,8 @@ import 'package:movie_project/domain/model/movie.dart';
 
 extension ToMovie on Results {
   Movie toMovie() {
-    return Movie(id: id!.toInt(),
+    return Movie(
+        id: id!.toInt(),
         title: title ?? '',
         overview: overview ?? '',
         posterPath: posterPath ?? '',
