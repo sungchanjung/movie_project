@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:movie_project/main.dart';
 import 'package:movie_project/presentation/archived/movie_archived_view_model.dart';
 import 'package:provider/provider.dart';
@@ -26,40 +24,92 @@ class _MovieArchivedScreenState extends State<MovieArchivedScreen> {
         child: Column(
           children: [
             SizedBox(
+              height: 24,
+            ),
+            SizedBox(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               child: ListView(
                 children: archived.likeList.map((e) {
                   return Container(
-                    height: 120,
+                    height: 144,
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 8),
+                      padding: const EdgeInsets.only(
+                          top: 0, left: 16.0, right: 16.0, bottom: 16),
                       child: Row(
                         children: [
-                          Image.network(
-                            "https://image.tmdb.org/t/p/w500/${e.posterPath}",
-                            width: 120,
-                            height: 120,
-                            fit: BoxFit.cover,
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Image.network(
+                              "https://image.tmdb.org/t/p/w500/${e.posterPath}",
+                              width: 144,
+                              height: 144,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 8,
                           ),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(((e.voteAverage * 10).round() / 10).toString()),
-                                    Text('자세히 보기'),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.star,
+                                          color: Color(0xFFFFB800),
+                                          size: 16,
+                                        ),
+                                        SizedBox(
+                                          width: 4,
+                                        ),
+                                        Text(
+                                          ((e.voteAverage * 10).round() / 10)
+                                              .toString(),
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width: 18,
+                                      height: 18,
+                                      child: IconButton(
+                                        onPressed: () {
+                                          viewModel.onDelete(e.id);
+                                        },
+                                        padding: EdgeInsets.zero,
+                                        icon: Icon(
+                                          Icons.delete,
+                                          size: 18,
+                                          color: Colors.red.shade400,
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
-                                Text(e.title),
+                                Text(
+                                  e.title,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                SizedBox(
+                                  height: 4,
+                                ),
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width,
                                   height: 60,
                                   child: Text(
                                     e.overview,
-                                    overflow: TextOverflow.ellipsis,maxLines: 3,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 3,
                                   ),
                                 ),
                               ],
