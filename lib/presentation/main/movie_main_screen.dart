@@ -29,26 +29,33 @@ class _MovieMainScreenState extends State<MovieMainScreen> {
     final viewModel = context.watch<MovieMainViewModel>();
 
     return Scaffold(
-      floatingActionButton: Row(
-        children: [
-          FloatingActionButton(
-            heroTag: '넘길래요',
-            onPressed: () {
-              viewModel.onPass();
-            },
-            child: Text('넘길래요'),
-          ),
-          FloatingActionButton(
-            heroTag: '좋아요',
-            onPressed: () {
-              viewModel.onLikes(viewModel.movieList[viewModel.index]);
-            },
-            child: Text('좋아요'),
-          ),
-        ],
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            FloatingActionButton(
+              backgroundColor: Colors.black,
+              heroTag: '넘기기',
+              onPressed: () {
+                viewModel.onPass();
+              },
+              child: Icon(Icons.thumb_down, color: Colors.white,),
+            ),
+            FloatingActionButton(
+              backgroundColor: Colors.black,
+              heroTag: '좋아요',
+              onPressed: () {
+                viewModel.onLikes(viewModel.movieList[viewModel.index]);
+              },
+              child: Icon(Icons.thumb_up, color: Colors.white,),
+            ),
+          ],
+        ),
       ),
       appBar: AppBar(
-        title: Text('영화목록'),
+        title: Text('영화목록', style: TextStyle(color: Colors.black, fontSize: 20),),
         actions: [
           IconButton(
             onPressed: () {
@@ -66,46 +73,53 @@ class _MovieMainScreenState extends State<MovieMainScreen> {
                 ),
               );
             },
-            icon: Icon(Icons.favorite),
+            icon: Icon(Icons.list_alt, color: Colors.black,),
           ),
         ],
       ),
       body: viewModel.isLoading
           ? CircularProgressIndicator()
-          : Column(
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: 590,
-                  child: Image.network(
-                    "https://image.tmdb.org/t/p/w500/${viewModel.movieList[viewModel.index].posterPath}",
-                    fit: BoxFit.fill,
+          : SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+            child: Column(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 590,
+                    child: Image.network(
+                      "https://image.tmdb.org/t/p/w500/${viewModel.movieList[viewModel.index].posterPath}",
+                      fit: BoxFit.fill,
+                    ),
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  width: double.infinity,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '쿵푸팬더',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w700),
-                      ),
-                      Icon(Icons.star),
-                      Text('평점'),
-                      Text(
-                        '내용',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w700),
-                      ),
-                      Text('팬더가 블라블ㄹ라블라'),
-                    ],
+                  Container(
+                    padding: EdgeInsets.all(8),
+                    width: double.infinity,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 4,),
+                        Text(
+                          viewModel.movieList[viewModel.index].title,
+                          style: TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 4,),
+                        Row(
+                          children: [
+                            Icon(Icons.star, size: 18, color: Color(0xFFFFB800),),
+                            SizedBox(width: 4,),
+                            Text(((viewModel.movieList[viewModel.index].voteAverage * 10).round() / 10).toString(),style: TextStyle(fontWeight: FontWeight.bold),),
+                          ],
+                        ),
+                        SizedBox(height: 4,),
+                        SizedBox(height: 4,),
+                        Text(viewModel.movieList[viewModel.index].overview),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
+                ],
+              ),
+          ),
     );
   }
 }
