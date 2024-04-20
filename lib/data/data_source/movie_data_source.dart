@@ -1,23 +1,20 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:movie_project/core/config/themoviedb_config.dart';
 
 import '../dto/movie_dto.dart';
 
 class MovieDataSource {
-  final _baseUrl = "https://api.themoviedb.org/3/movie/popular?api_key=";
-  final _apiKey = '84903395cbf9b0e42926167ee3526acb';
+  Future<List<ResultsDto>> getMovie() async {
+    final response = await http.get(Uri.parse(
+        '${TheMovieDbConfig.baseUrl}/3/movie/popular?api_key=${TheMovieDbConfig.apiKey}&language=ko-KR'));
 
-  Future<List<Results>> getMovie() async {
-    final response =
-        await http.get(Uri.parse('$_baseUrl$_apiKey&language=ko-KR'));
-
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> jsonData = json.decode(response.body);
-      final List<dynamic> results = jsonData['results'];
-      return results.map((json) => Results.fromJson(json)).toList();
-    } else {
+    if (response.statusCode != 200) {
       throw Exception('Error');
     }
+    final Map<String, dynamic> jsonData = json.decode(response.body);
+    final List<dynamic> results = jsonData['results'];
+    return results.map((json) => ResultsDto.fromJson(json)).toList();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:movie_project/core/data_source/archived.dart';
 import 'package:movie_project/data/data_source/movie_data_source.dart';
 import 'package:movie_project/data/repository/movie_repository_impl.dart';
@@ -9,7 +10,8 @@ import 'package:provider/provider.dart';
 
 final Archived archived = Archived([]);
 
-void main() {
+Future<void> main() async {
+  await dotenv.load(fileName: "assets/config/.env");
   runApp(const MyApp());
 }
 
