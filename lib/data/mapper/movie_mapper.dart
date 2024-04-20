@@ -1,7 +1,7 @@
 import 'package:movie_project/data/dto/movie_dto.dart';
 import 'package:movie_project/domain/model/movie.dart';
 
-extension ToMovie on Results {
+extension ToMovie on ResultsDto {
   Movie toMovie() {
     return Movie(
         id: id!.toInt(),
