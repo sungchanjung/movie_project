@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:movie_project/domain/repository/movie_repository.dart';
 import 'package:movie_project/main.dart';
@@ -23,6 +25,7 @@ class MovieArchivedViewModel with ChangeNotifier {
 
   void onDelete(int deleteId) async {
     archived.likeList.removeWhere((element) => element.id == deleteId);
+    await archivedList.put('likeList', jsonEncode(archived.likeList));
     notifyListeners();
   }
 }
