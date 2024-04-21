@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:movie_project/core/data_source/archived.dart';
 import 'package:movie_project/domain/model/movie.dart';
 import 'package:movie_project/domain/repository/movie_repository.dart';
 import 'package:movie_project/main.dart';
@@ -42,6 +45,7 @@ class MovieMainViewModel with ChangeNotifier {
   void onLikes(Movie movie) async {
     if (_index < _movieList.length - 1) {
       archived.likeList.add(movie);
+      await archivedList.put('likeList', jsonEncode(archived.likeList));
       _index++;
       notifyListeners();
     } else if (_index == _movieList.length - 1) {
@@ -68,5 +72,13 @@ class MovieMainViewModel with ChangeNotifier {
       _isEnd = true;
       notifyListeners();
     }
+  }
+
+  void getArchived() async {
+    archived.likeList =
+        (jsonDecode(archivedList.get('likeList').toString()) as List<dynamic>)
+            .map((e) => Movie.fromJson(e))
+            .toList();
+    notifyListeners();
   }
 }

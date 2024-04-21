@@ -20,7 +20,9 @@ class _MovieMainScreenState extends State<MovieMainScreen> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      final viewModel = context.read<MovieMainViewModel>().showMovie();
+      final viewModel = context.read<MovieMainViewModel>();
+      viewModel.showMovie();
+      viewModel.getArchived();
     });
   }
 
@@ -51,6 +53,7 @@ class _MovieMainScreenState extends State<MovieMainScreen> {
               heroTag: '좋아요',
               onPressed: () {
                 viewModel.onLikes(viewModel.movieList[viewModel.index]);
+                // viewModel.onTest(viewModel.movieList[viewModel.index]);
               },
               child: Icon(
                 Icons.thumb_up,
