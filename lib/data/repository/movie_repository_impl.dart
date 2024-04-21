@@ -15,8 +15,8 @@ class MovieRepositoryImpl implements MovieRepository {
         _archived = archived;
 
   @override
-  Future<List<Movie>> getMovieList() async {
-    final data = await _api.getMovie();
+  Future<List<Movie>> getMovieList(int page) async {
+    final data = await _api.getMovie(page);
     return data.map((e) => e.toMovie()).toList();
   }
 }

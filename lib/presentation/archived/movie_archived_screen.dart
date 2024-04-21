@@ -28,7 +28,7 @@ class _MovieArchivedScreenState extends State<MovieArchivedScreen> {
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
+              height: MediaQuery.of(context).size.height - 96,
               child: ListView(
                 children: archived.likeList.map((e) {
                   return Container(
@@ -96,6 +96,7 @@ class _MovieArchivedScreenState extends State<MovieArchivedScreen> {
                                 ),
                                 Text(
                                   e.title,
+                                  maxLines: 1, overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w600),
