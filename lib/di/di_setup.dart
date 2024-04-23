@@ -8,6 +8,7 @@ import 'package:movie_project/presentation/archived/movie_archived_view_model.da
 import 'package:movie_project/presentation/main/movie_main_view_model.dart';
 
 final getIt = GetIt.instance;
+
 Future<void> diSetup() async {
   getIt.registerSingleton<Archived>(Archived([]));
 
@@ -15,11 +16,10 @@ Future<void> diSetup() async {
   getIt.registerSingleton<Box<String>>(hiveBox);
 
   getIt.registerSingleton<MovieDataSource>(MovieDataSource());
-  getIt.registerSingleton<MovieRepository>(
-      MovieRepositoryImpl(api: getIt()));
+  getIt.registerSingleton<MovieRepository>(MovieRepositoryImpl(api: getIt()));
 
-  getIt.registerFactory(() => MovieMainViewModel(movieRepository: getIt(), archived: getIt()));
-  getIt.registerFactory(() => MovieArchivedViewModel(movieRepository: getIt(), archived: getIt()));
-
-
+  getIt.registerFactory(
+      () => MovieMainViewModel(movieRepository: getIt(), archived: getIt()));
+  getIt.registerFactory(() =>
+      MovieArchivedViewModel(movieRepository: getIt(), archived: getIt()));
 }

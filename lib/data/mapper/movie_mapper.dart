@@ -4,11 +4,11 @@ import 'package:movie_project/domain/model/movie.dart';
 extension ToMovie on ResultsDto {
   Movie toMovie() {
     return Movie(
-        id: id!.toInt(),
-        title: title ?? '',
-        overview: overview ?? '',
-        posterPath: posterPath ?? '',
-        voteAverage: voteAverage ?? 0,
-        );
+      id: id!.toInt(),
+      title: title ?? '',
+      overview: overview ?? '',
+      posterPath: posterPath ?? '',
+      voteAverage: voteAverage ?? 0,
+    );
   }
 }

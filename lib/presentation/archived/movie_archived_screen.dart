@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movie_project/core/data_source/archived.dart';
-import 'package:movie_project/di/di_setup.dart';
 import 'package:movie_project/presentation/archived/movie_archived_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +11,7 @@ class MovieArchivedScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('나의 보관함'),
+        title: const Text('나의 보관함'),
       ),
       body: ListView(
         children: viewModel.archived.likeList.map((e) {
@@ -25,8 +23,8 @@ class MovieArchivedScreen extends StatelessWidget {
                 bottom: e == viewModel.archived.likeList.last ? 16 : 0),
             height: 150,
             child: Padding(
-              padding:
-                  EdgeInsets.only(top: 8, left: 16.0, right: 16.0, bottom: 8),
+              padding: const EdgeInsets.only(
+                  top: 8, left: 16.0, right: 16.0, bottom: 8),
               child: Row(
                 children: [
                   ClipRRect(
@@ -38,7 +36,7 @@ class MovieArchivedScreen extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 8,
                   ),
                   Expanded(
@@ -50,18 +48,18 @@ class MovieArchivedScreen extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.star,
                                   color: Color(0xFFFFB800),
                                   size: 16,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 4,
                                 ),
                                 Text(
                                   ((e.voteAverage * 10).round() / 10)
                                       .toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -88,10 +86,10 @@ class MovieArchivedScreen extends StatelessWidget {
                           e.title,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w600),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 4,
                         ),
                         SizedBox(
