@@ -12,7 +12,6 @@ class Movie with _$Movie {
     required String overview,
     required String posterPath,
     required num voteAverage,
-    required List genreIds,
   }) = _Movie;
 
   factory Movie.fromJson(Map<String, Object?> json) => _$MovieFromJson(json);

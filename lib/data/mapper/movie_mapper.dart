@@ -9,6 +9,6 @@ extension ToMovie on ResultsDto {
         overview: overview ?? '',
         posterPath: posterPath ?? '',
         voteAverage: voteAverage ?? 0,
-        genreIds: genreIds ?? []);
+        );
   }
 }
