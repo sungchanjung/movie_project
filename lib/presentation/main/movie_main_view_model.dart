@@ -11,6 +11,7 @@ class MovieMainViewModel with ChangeNotifier {
   final MovieRepository _movieRepository;
   final Archived archived;
 
+
   MovieMainViewModel({
     required MovieRepository movieRepository,
     required this.archived,
@@ -95,5 +96,4 @@ class MovieMainViewModel with ChangeNotifier {
             .toList();
     notifyListeners();
   }
-
 }

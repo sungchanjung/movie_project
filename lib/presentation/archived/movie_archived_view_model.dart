@@ -16,15 +16,15 @@ class MovieArchivedViewModel with ChangeNotifier {
 
   }) : _movieRepository = movieRepository;
 
-  bool isLoading = true;
+  bool _isLoading = true;
 
-  MovieRepository get movieRepository => _movieRepository;
+  bool get isLoading => _isLoading;
 
   void showLoading() async {
-    isLoading = true;
+    _isLoading = true;
     notifyListeners();
 
-    isLoading = archived.likeList.isEmpty ? true : false;
+    _isLoading = archived.likeList.isEmpty ? true : false;
     notifyListeners();
   }
 
