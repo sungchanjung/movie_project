@@ -16,13 +16,13 @@ class MovieArchivedScreen extends StatelessWidget {
         title: Text('나의 보관함'),
       ),
       body: ListView(
-        children: getIt<Archived>().likeList.map((e) {
+        children: viewModel.archived.likeList.map((e) {
           return Container(
             margin: EdgeInsets.only(
-                top: e == getIt<Archived>().likeList.first ? 16 : 0,
+                top: e == viewModel.archived.likeList.first ? 16 : 0,
                 left: 0,
                 right: 0,
-                bottom: e == getIt<Archived>().likeList.last ? 16 : 0),
+                bottom: e == viewModel.archived.likeList.last ? 16 : 0),
             height: 150,
             child: Padding(
               padding:

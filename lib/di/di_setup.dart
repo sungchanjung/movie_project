@@ -18,6 +18,8 @@ Future<void> diSetup() async {
   getIt.registerSingleton<MovieRepository>(
       MovieRepositoryImpl(api: getIt()));
 
-  getIt.registerFactory(() => MovieMainViewModel(movieRepository: getIt()));
+  getIt.registerFactory(() => MovieMainViewModel(movieRepository: getIt(), archived: getIt()));
   getIt.registerFactory(() => MovieArchivedViewModel(movieRepository: getIt(), archived: getIt()));
+
+
 }

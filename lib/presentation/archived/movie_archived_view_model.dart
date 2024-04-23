@@ -24,14 +24,14 @@ class MovieArchivedViewModel with ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    isLoading = getIt<Archived>().likeList.isEmpty ? true : false;
+    isLoading = archived.likeList.isEmpty ? true : false;
     notifyListeners();
   }
 
   void onDelete(int deleteId) async {
-    getIt<Archived>().likeList.removeWhere((element) => element.id == deleteId);
+    archived.likeList.removeWhere((element) => element.id == deleteId);
     await getIt<Box<String>>()
-        .put('likeList', jsonEncode(getIt<Archived>().likeList));
+        .put('likeList', jsonEncode(archived.likeList));
     notifyListeners();
   }
 }

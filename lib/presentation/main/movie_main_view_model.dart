@@ -9,9 +9,11 @@ import 'package:movie_project/domain/repository/movie_repository.dart';
 
 class MovieMainViewModel with ChangeNotifier {
   final MovieRepository _movieRepository;
+  final Archived archived;
 
   MovieMainViewModel({
     required MovieRepository movieRepository,
+    required this.archived,
   }) : _movieRepository = movieRepository;
 
   List<Movie> _movieList = [];
@@ -87,7 +89,7 @@ class MovieMainViewModel with ChangeNotifier {
   void getArchived() async {
     String? likeLists = getIt<Box<String>>().get('likeList') ?? '[]';
 
-    getIt<Archived>().likeList =
+    archived.likeList =
         (jsonDecode(likeLists.toString()) as List<dynamic>)
             .map((e) => Movie.fromJson(e))
             .toList();
