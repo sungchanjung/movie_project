@@ -6,13 +6,10 @@ import 'package:movie_project/domain/repository/movie_repository.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
   final MovieDataSource _api;
-  final Archived _archived;
 
   const MovieRepositoryImpl({
     required MovieDataSource api,
-    required Archived archived,
-  })  : _api = api,
-        _archived = archived;
+  })  : _api = api;
 
   @override
   Future<List<Movie>> getMovieList(int page) async {
