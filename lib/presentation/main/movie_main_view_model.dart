@@ -36,7 +36,7 @@ class MovieMainViewModel with ChangeNotifier {
 
   int get index => _index;
 
-  void showMovie() async {
+  Future<void> showMovie() async {
     _isLoading = true;
     notifyListeners();
 
@@ -64,7 +64,7 @@ class MovieMainViewModel with ChangeNotifier {
           .put('likeList', jsonEncode(getIt<Archived>().likeList));
       _page++;
       _index = 0;
-      showMovie();
+      await showMovie();
       notifyListeners();
     } else {
       _isEnd = true;
@@ -79,7 +79,7 @@ class MovieMainViewModel with ChangeNotifier {
     } else if (_index == _movieList.length - 1) {
       _page++;
       _index = 0;
-      showMovie();
+      await showMovie();
       notifyListeners();
     } else {
       _isEnd = true;
