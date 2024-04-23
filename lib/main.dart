@@ -4,17 +4,13 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:movie_project/core/router/router.dart';
 import 'package:movie_project/di/di_setup.dart';
 
-//final Archived archived = Archived([]);
-late final Box<String> archivedList;
-
 Future<void> main() async {
   await Hive.initFlutter();
-
-  archivedList = await Hive.openBox<String>('archivedList.db');
-
+  await diSetup();
   await dotenv.load(fileName: "assets/config/.env");
 
-  diSetup();
+  getIt<Box<String>>();
+
   runApp(const MyApp());
 }
 
