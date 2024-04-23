@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movie_project/presentation/archived/movie_archived_screen.dart';
 import 'package:movie_project/presentation/main/movie_main_view_model.dart';
 import 'package:provider/provider.dart';
@@ -70,21 +71,7 @@ class _MovieMainScreenState extends State<MovieMainScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => ChangeNotifierProvider(
-                    create: (_) => MovieArchivedViewModel(
-                      movieRepository: MovieRepositoryImpl(
-                        api: MovieDataSource(),
-                        archived: archived,
-                      ),
-                    ),
-                    child: MovieArchivedScreen(),
-                  ),
-                ),
-              );
-            },
+            onPressed: () => context.push('/archived'),
             icon: Icon(
               Icons.list_alt,
               color: Colors.black,
