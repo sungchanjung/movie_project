@@ -93,4 +93,5 @@ class MovieMainViewModel with ChangeNotifier {
             .toList();
     notifyListeners();
   }
+
 }
