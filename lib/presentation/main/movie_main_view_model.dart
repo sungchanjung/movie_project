@@ -53,15 +53,13 @@ class MovieMainViewModel with ChangeNotifier {
 
   void onLikes(Movie movie) async {
     if (_index < _movieList.length - 1) {
-      getIt<Archived>().likeList.add(movie);
-      await getIt<Box<String>>()
-          .put('likeList', jsonEncode(getIt<Archived>().likeList));
+      archived.likeList.add(movie);
+      await _movieRepository.saveLikeList(archived.likeList);
       _index++;
       notifyListeners();
     } else if (_index <= _movieList.length - 1) {
-      getIt<Archived>().likeList.add(movie);
-      await getIt<Box<String>>()
-          .put('likeList', jsonEncode(getIt<Archived>().likeList));
+      archived.likeList.add(movie);
+      await _movieRepository.saveLikeList(archived.likeList);
       _page++;
       _index = 0;
       await showMovie();
@@ -88,12 +86,7 @@ class MovieMainViewModel with ChangeNotifier {
   }
 
   void getArchived() async {
-    String? likeLists = getIt<Box<String>>().get('likeList') ?? '[]';
-
-    archived.likeList =
-        (jsonDecode(likeLists.toString()) as List<dynamic>)
-            .map((e) => Movie.fromJson(e))
-            .toList();
+    archived.likeList = await _movieRepository.getLikeList();
     notifyListeners();
   }
 }

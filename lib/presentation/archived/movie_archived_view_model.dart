@@ -30,8 +30,7 @@ class MovieArchivedViewModel with ChangeNotifier {
 
   void onDelete(int deleteId) async {
     archived.likeList.removeWhere((element) => element.id == deleteId);
-    await getIt<Box<String>>()
-        .put('likeList', jsonEncode(archived.likeList));
+    await _movieRepository.deleteLikeList(archived.likeList);
     notifyListeners();
   }
 }
