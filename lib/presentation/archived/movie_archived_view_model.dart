@@ -8,9 +8,12 @@ import 'package:movie_project/domain/repository/movie_repository.dart';
 
 class MovieArchivedViewModel with ChangeNotifier {
   final MovieRepository _movieRepository;
+  final Archived archived;
 
   MovieArchivedViewModel({
+    required this.archived,
     required MovieRepository movieRepository,
+
   }) : _movieRepository = movieRepository;
 
   bool isLoading = true;

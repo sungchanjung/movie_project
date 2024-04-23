@@ -19,5 +19,5 @@ Future<void> diSetup() async {
       MovieRepositoryImpl(api: getIt()));
 
   getIt.registerFactory(() => MovieMainViewModel(movieRepository: getIt()));
-  getIt.registerFactory(() => MovieArchivedViewModel(movieRepository: getIt()));
+  getIt.registerFactory(() => MovieArchivedViewModel(movieRepository: getIt(), archived: getIt()));
 }
