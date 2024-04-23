@@ -11,7 +11,7 @@ class MovieRepositoryImpl implements MovieRepository {
 
   const MovieRepositoryImpl({
     required MovieDataSource api,
-  })  : _api = api;
+  }) : _api = api;
 
   @override
   Future<List<Movie>> getMovieList(int page) async {
@@ -21,22 +21,23 @@ class MovieRepositoryImpl implements MovieRepository {
 
   @override
   Future<void> deleteLikeList(List<Movie> onDeleteList) async {
-
-      await  Hive.box<String>('archivedList.db')
-          .put('likeList', jsonEncode(onDeleteList));
+    await Hive.box<String>('archivedList.db')
+        .put('likeList', jsonEncode(onDeleteList));
   }
 
   @override
   Future<List<Movie>> getLikeList() async {
-    String? likeLists = Hive.box<String>('archivedList.db').get('likeList') ?? '[]';
+    String? likeLists =
+        Hive.box<String>('archivedList.db').get('likeList') ?? '[]';
 
     return (jsonDecode(likeLists.toString()) as List<dynamic>)
-            .map((e) => Movie.fromJson(e))
-            .toList();
+        .map((e) => Movie.fromJson(e))
+        .toList();
   }
 
   @override
   Future<void> saveLikeList(List<Movie> onSaveList) async {
-    await Hive.box<String>('archivedList.db').put('likeList', jsonEncode(onSaveList));
+    await Hive.box<String>('archivedList.db')
+        .put('likeList', jsonEncode(onSaveList));
   }
 }

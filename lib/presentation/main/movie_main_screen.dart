@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:movie_project/presentation/archived/movie_archived_screen.dart';
 import 'package:movie_project/presentation/main/movie_main_view_model.dart';
 import 'package:provider/provider.dart';
-
-import '../../data/data_source/movie_data_source.dart';
-import '../../data/repository/movie_repository_impl.dart';
-import '../../main.dart';
-import '../archived/movie_archived_view_model.dart';
 
 class MovieMainScreen extends StatefulWidget {
   const MovieMainScreen({super.key});
@@ -44,7 +38,7 @@ class _MovieMainScreenState extends State<MovieMainScreen> {
               onPressed: () {
                 viewModel.onPass();
               },
-              child: Icon(
+              child: const Icon(
                 Icons.thumb_down,
                 color: Colors.white,
               ),
@@ -56,7 +50,7 @@ class _MovieMainScreenState extends State<MovieMainScreen> {
                 viewModel.onLikes(viewModel.movieList[viewModel.index]);
                 // viewModel.onTest(viewModel.movieList[viewModel.index]);
               },
-              child: Icon(
+              child: const Icon(
                 Icons.thumb_up,
                 color: Colors.white,
               ),
@@ -65,14 +59,14 @@ class _MovieMainScreenState extends State<MovieMainScreen> {
         ),
       ),
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           '영화목록',
           style: TextStyle(color: Colors.black, fontSize: 20),
         ),
         actions: [
           IconButton(
             onPressed: () => context.push('/archived'),
-            icon: Icon(
+            icon: const Icon(
               Icons.list_alt,
               color: Colors.black,
             ),
@@ -80,9 +74,9 @@ class _MovieMainScreenState extends State<MovieMainScreen> {
         ],
       ),
       body: viewModel.isLoading
-          ? CircularProgressIndicator()
+          ? const CircularProgressIndicator()
           : viewModel.isEnd == true
-              ? Center(
+              ? const Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -116,34 +110,35 @@ class _MovieMainScreenState extends State<MovieMainScreen> {
                           if (loadingProgress == null) {
                             return child;
                           }
-                          return Center(child: CircularProgressIndicator());
+                          return const Center(
+                              child: CircularProgressIndicator());
                         }),
                       ),
                       Container(
-                        padding: EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8),
                         width: double.infinity,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 4,
                             ),
                             Text(
                               viewModel.movieList[viewModel.index].title,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 22, fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 4,
                             ),
                             Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.star,
                                   size: 18,
                                   color: Color(0xFFFFB800),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 4,
                                 ),
                                 Text(
@@ -153,21 +148,22 @@ class _MovieMainScreenState extends State<MovieMainScreen> {
                                               .round() /
                                           10)
                                       .toString(),
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 4,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 4,
                             ),
                             Text(viewModel.movieList[viewModel.index].overview),
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 100,
                       )
                     ],

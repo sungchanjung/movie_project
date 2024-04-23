@@ -9,4 +9,3 @@ abstract interface class MovieRepository {
 
   Future<void> deleteLikeList(List<Movie> onDeleteList);
 }
-

@@ -1,7 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:movie_project/core/data_source/archived.dart';
 import 'package:movie_project/di/di_setup.dart';
 import 'package:movie_project/domain/model/movie.dart';
@@ -10,7 +7,6 @@ import 'package:movie_project/domain/repository/movie_repository.dart';
 class MovieMainViewModel with ChangeNotifier {
   final MovieRepository _movieRepository;
   final Archived archived;
-
 
   MovieMainViewModel({
     required MovieRepository movieRepository,
