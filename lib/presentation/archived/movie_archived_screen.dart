@@ -4,14 +4,9 @@ import 'package:movie_project/di/di_setup.dart';
 import 'package:movie_project/presentation/archived/movie_archived_view_model.dart';
 import 'package:provider/provider.dart';
 
-class MovieArchivedScreen extends StatefulWidget {
+class MovieArchivedScreen extends StatelessWidget {
   const MovieArchivedScreen({super.key});
 
-  @override
-  State<MovieArchivedScreen> createState() => _MovieArchivedScreenState();
-}
-
-class _MovieArchivedScreenState extends State<MovieArchivedScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<MovieArchivedViewModel>();
