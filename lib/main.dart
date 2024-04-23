@@ -3,6 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:movie_project/core/data_source/archived.dart';
+import 'package:movie_project/core/router/router.dart';
 import 'package:movie_project/data/data_source/movie_data_source.dart';
 import 'package:movie_project/data/repository/movie_repository_impl.dart';
 import 'package:movie_project/domain/model/movie.dart';
@@ -28,19 +29,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+    return MaterialApp.router(
+      routerConfig: router,
+      title: 'Movie Project',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home: ChangeNotifierProvider(
-          create: (_) => MovieMainViewModel(
-                movieRepository: MovieRepositoryImpl(
-                    api: MovieDataSource(), archived: archived),
-              ),
-          child: MovieMainScreen()),
     );
   }
 }
