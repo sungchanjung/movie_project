@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:hive/hive.dart';
+import 'package:movie_project/core/data_source/archived.dart';
+import 'package:movie_project/di/di_setup.dart';
 import 'package:movie_project/domain/repository/movie_repository.dart';
-import 'package:movie_project/main.dart';
 
 class MovieArchivedViewModel with ChangeNotifier {
   final MovieRepository _movieRepository;
@@ -19,13 +21,14 @@ class MovieArchivedViewModel with ChangeNotifier {
     isLoading = true;
     notifyListeners();
 
-    isLoading = archived.likeList.isEmpty ? true : false;
+    isLoading = getIt<Archived>().likeList.isEmpty ? true : false;
     notifyListeners();
   }
 
   void onDelete(int deleteId) async {
-    archived.likeList.removeWhere((element) => element.id == deleteId);
-    await archivedList.put('likeList', jsonEncode(archived.likeList));
+    getIt<Archived>().likeList.removeWhere((element) => element.id == deleteId);
+    await getIt<Box<String>>()
+        .put('likeList', jsonEncode(getIt<Archived>().likeList));
     notifyListeners();
   }
 }
