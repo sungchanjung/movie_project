@@ -81,10 +81,11 @@ class MovieMainViewModel with ChangeNotifier {
   }
 
   void getArchived() async {
-    archived.likeList =
-        (jsonDecode(archivedList.get('likeList').toString()) as List<dynamic>)
-            .map((e) => Movie.fromJson(e))
-            .toList();
+    String? likeLists = archivedList.get('likeList') ?? '[]';
+
+    archived.likeList = (jsonDecode(likeLists.toString()) as List<dynamic>)
+        .map((e) => Movie.fromJson(e))
+        .toList();
     notifyListeners();
   }
 }
