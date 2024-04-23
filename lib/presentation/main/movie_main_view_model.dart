@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:movie_project/core/data_source/archived.dart';
+import 'package:movie_project/di/di_setup.dart';
 import 'package:movie_project/domain/model/movie.dart';
 import 'package:movie_project/domain/repository/movie_repository.dart';
-import 'package:movie_project/main.dart';
 
 class MovieMainViewModel with ChangeNotifier {
   final MovieRepository _movieRepository;
@@ -39,7 +41,7 @@ class MovieMainViewModel with ChangeNotifier {
 
     _movieList = data
         .where((element) =>
-            !archived.likeList.any((movie) => movie.id == element.id))
+            !getIt<Archived>().likeList.any((movie) => movie.id == element.id))
         .toList();
 
     _isLoading = false;
@@ -48,13 +50,15 @@ class MovieMainViewModel with ChangeNotifier {
 
   void onLikes(Movie movie) async {
     if (_index < _movieList.length - 1) {
-      archived.likeList.add(movie);
-      await archivedList.put('likeList', jsonEncode(archived.likeList));
+      getIt<Archived>().likeList.add(movie);
+      await getIt<Box<String>>()
+          .put('likeList', jsonEncode(getIt<Archived>().likeList));
       _index++;
       notifyListeners();
     } else if (_index <= _movieList.length - 1) {
-      archived.likeList.add(movie);
-      await archivedList.put('likeList', jsonEncode(archived.likeList));
+      getIt<Archived>().likeList.add(movie);
+      await getIt<Box<String>>()
+          .put('likeList', jsonEncode(getIt<Archived>().likeList));
       _page++;
       _index = 0;
       showMovie();
@@ -81,11 +85,12 @@ class MovieMainViewModel with ChangeNotifier {
   }
 
   void getArchived() async {
-    String? likeLists = archivedList.get('likeList') ?? '[]';
+    String? likeLists = getIt<Box<String>>().get('likeList') ?? '[]';
 
-    archived.likeList = (jsonDecode(likeLists.toString()) as List<dynamic>)
-        .map((e) => Movie.fromJson(e))
-        .toList();
+    getIt<Archived>().likeList =
+        (jsonDecode(likeLists.toString()) as List<dynamic>)
+            .map((e) => Movie.fromJson(e))
+            .toList();
     notifyListeners();
   }
 }

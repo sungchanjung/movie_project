@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_project/main.dart';
+import 'package:movie_project/core/data_source/archived.dart';
+import 'package:movie_project/di/di_setup.dart';
 import 'package:movie_project/presentation/archived/movie_archived_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -20,12 +21,17 @@ class _MovieArchivedScreenState extends State<MovieArchivedScreen> {
         title: Text('나의 보관함'),
       ),
       body: ListView(
-        children: archived.likeList.map((e) {
+        children: getIt<Archived>().likeList.map((e) {
           return Container(
-            margin: EdgeInsets.only(top: e == archived.likeList.first? 16 : 0, left: 0, right: 0, bottom: e == archived.likeList.last? 16 : 0),
+            margin: EdgeInsets.only(
+                top: e == getIt<Archived>().likeList.first ? 16 : 0,
+                left: 0,
+                right: 0,
+                bottom: e == getIt<Archived>().likeList.last ? 16 : 0),
             height: 150,
             child: Padding(
-              padding: EdgeInsets.only( top: 8, left: 16.0, right: 16.0, bottom: 8),
+              padding:
+                  EdgeInsets.only(top: 8, left: 16.0, right: 16.0, bottom: 8),
               child: Row(
                 children: [
                   ClipRRect(
@@ -45,8 +51,7 @@ class _MovieArchivedScreenState extends State<MovieArchivedScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
-                          mainAxisAlignment:
-                              MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Row(
                               children: [
@@ -86,10 +91,10 @@ class _MovieArchivedScreenState extends State<MovieArchivedScreen> {
                         ),
                         Text(
                           e.title,
-                          maxLines: 1, overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600),
+                              fontSize: 16, fontWeight: FontWeight.w600),
                         ),
                         SizedBox(
                           height: 4,
